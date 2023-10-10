@@ -88,6 +88,7 @@ package-lock.json
 # Test Reports
 /reports
 
+/ios/Pods
 # Stack Dumps generated when programs crash (Ex. bash.exe.stackdump on Win)
 *.stackdump
 
