@@ -1,4 +1,7 @@
-import { COLORS } from "./colors/colors";
 import { TYPOGRAPHY } from "./typography/typography";
+import { COLORS } from "./colors/colors";
 
-export { COLORS, TYPOGRAPHY };
+export const THEME = {
+  TYPOGRAPHY,
+  COLORS,
+};

@@ -1,5 +1,5 @@
 export const TYPOGRAPHY = {
-  FONT_FAMILYS: {
+  FONT_FAMILIES: {
     PT_SANS_CAPTION: "PTSansCaption-Regular",
     PT_SANS: "PTSans-Regular",
   },
@@ -13,3 +13,4 @@ export const TYPOGRAPHY = {
     P2: 14,
   },
 } as const;
+

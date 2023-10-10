@@ -3,13 +3,17 @@ import AddCardScreen from "screens/AddCard/AddCard";
 import CardAddedConfirmationScreen from "screens/CardAddedConfimation/CardAddedConfirmation";
 import CardsScreen from "screens/Cards/Cards";
 import HomeScreen from "screens/Home/Home";
-import { NAV_CONSTANTS } from "utils/constants/navigationContants";
+import { NAV_CONSTANTS } from "utils/constants";
 
 const MainNavigator = () => {
   const Stack = createNativeStackNavigator();
   return (
-    <Stack.Navigator>
-      <Stack.Screen name={NAV_CONSTANTS.SCREENS.HOME} component={HomeScreen} />
+    <Stack.Navigator screenOptions={{}}>
+      <Stack.Screen
+        name={NAV_CONSTANTS.SCREENS.HOME}
+        component={HomeScreen}
+        options={{ headerShown: false }}
+      />
       <Stack.Screen
         name={NAV_CONSTANTS.SCREENS.CARDS}
         component={CardsScreen}

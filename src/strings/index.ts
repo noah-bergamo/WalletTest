@@ -1,0 +1,1 @@
+export { HomeStrings } from "./HomeStrings";
