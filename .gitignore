@@ -89,6 +89,7 @@ package-lock.json
 /reports
 
 /ios/Pods
+/ios/build
 # Stack Dumps generated when programs crash (Ex. bash.exe.stackdump on Win)
 *.stackdump
 
@@ -155,3 +156,4 @@ package-lock.json
 
 # CircleCI
 .circleci/generated_config.yml
+.fake
