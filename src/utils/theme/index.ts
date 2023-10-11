@@ -5,3 +5,5 @@ export const THEME = {
   TYPOGRAPHY,
   COLORS,
 };
+
+export { COLORS, TYPOGRAPHY };

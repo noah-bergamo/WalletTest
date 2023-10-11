@@ -1,5 +1,5 @@
 import React, { ReactNode } from "react";
-import { Image, StyleSheet, View, ViewProps } from "react-native";
+import { StyleSheet, View, ViewProps } from "react-native";
 import { NAV_CONSTANTS } from "utils/constants";
 import { THEME } from "utils/theme";
 import { COLORS } from "utils/theme/colors/colors";
@@ -20,13 +20,14 @@ const HomeDetails = ({ showDetails }: { showDetails: boolean }) => {
   ) : null;
 };
 
-const Screen = ({ children, noPadding, name, ...rest }: ScreenProps) => {
+const Screen = ({ children, noPadding, name, style, ...rest }: ScreenProps) => {
   const { container } = styles;
-  const showDetails = name === "HOME";
+  const showDetails = name === "HOME" || name === "ADD_CARD";
   return (
     <View
       style={[
         container,
+        style,
         {
           paddingHorizontal: noPadding ? 0 : container.paddingHorizontal,
           paddingTop: noPadding ? 0 : container.paddingTop,

@@ -1,13 +1,11 @@
-import { useNavigation } from "@react-navigation/native";
-import Button from "components/Button/Button";
-import Screen from "components/base/Screen/Screen";
-import Text from "components/base/Text/Text";
 import React from "react";
 import { StyleSheet, View } from "react-native";
+import { HomeProps } from "navigation/MainNavigator";
+import { Button, Screen, Text } from "components";
 import { HomeStrings } from "strings";
 
-const HomeScreen = () => {
-  const { navigate } = useNavigation();
+const HomeScreen = ({ navigation }: HomeProps) => {
+  const { navigate } = navigation;
   const { container, buttonsContainer } = styles;
 
   return (
