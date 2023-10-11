@@ -7,28 +7,46 @@ import { COLORS } from "utils/theme/colors/colors";
 type ScreenProps = {
   name: keyof typeof NAV_CONSTANTS.SCREENS;
   children: ReactNode;
+  noPadding?: boolean;
 } & ViewProps;
 
-const Screen = ({ children, ...rest }: ScreenProps) => {
+const HomeDetails = ({ showDetails }: { showDetails: boolean }) => {
   const { backgroundTopDetail, backgroundBottomDetail } = styles;
+  return showDetails ? (
+    <>
+      <View style={backgroundTopDetail} />
+      <View style={backgroundBottomDetail} />
+    </>
+  ) : null;
+};
+
+const Screen = ({ children, noPadding, name, ...rest }: ScreenProps) => {
+  const { container } = styles;
+  const showDetails = name === "HOME";
   return (
     <View
-      style={{
-        flex: 1,
-        paddingHorizontal: 16,
-        paddingTop: 24,
-        backgroundColor: THEME.COLORS.BASE.DARK_BLUE,
-      }}
+      style={[
+        container,
+        {
+          paddingHorizontal: noPadding ? 0 : container.paddingHorizontal,
+          paddingTop: noPadding ? 0 : container.paddingTop,
+        },
+      ]}
       {...rest}
     >
-      <View style={backgroundTopDetail} />
+      <HomeDetails showDetails={showDetails} />
       {children}
-      <View style={backgroundBottomDetail} />
     </View>
   );
 };
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    paddingHorizontal: 16,
+    paddingTop: 24,
+    backgroundColor: THEME.COLORS.BASE.DARK_BLUE,
+  },
   backgroundTopDetail: {
     position: "absolute",
     backgroundColor: `${COLORS.TEXT.LIGHT_GRAY}40`,

@@ -1,7 +1,6 @@
 import Text from "components/base/Text/Text";
-import React, { ReactNode } from "react";
+import React from "react";
 import { TouchableOpacity, TouchableOpacityProps } from "react-native";
-import { THEME } from "utils/theme";
 import { COLORS } from "utils/theme/colors/colors";
 
 type ButtonVariant = "green" | "blue";
