@@ -1,18 +1,59 @@
-MILESTONES:
-[X] - Iniciar e configurar o projeto
-[X] - Iniciar o projeto no github
-[X] - Adicionar bibliotecas principais: react navigation, react native svg, json-server
-[X] - Adicionar fonte customizada
-[X] - Criar arquivos de tema: tipografia, espaçamentos, cores, icones
-[X] - Criar o navigator e adicionar as telas como placeholder. Obs, criar arquivos de constantes para o nome das screens e stacks.
-[X] - Criar os componentes base:
-[X] - Texto
-[X] - Tela
-[X] - Input
-[X] - Botão
-[ ] - Montar as telas:
-[X] - Home
-[-] - AddCard
-[ ] - CardAddedConfirmation
-[ ] - Animação (Opcional)
-[-] - Cards
+# Wallet Test
+
+## Descrição
+
+Esse é um teste efetuado em um dos meus processo seletivos.
+
+## Pré-requisitos
+
+Liste os pré-requisitos necessários para rodar o projeto, como as versões do Node.js, React Native, etc.
+É necessário ter seguido o passo-a-passo da configuração do React Native. Caso não tenha feito, [clique aqui](https://reactnative.dev/docs/environment-setup).
+
+## Instalação
+
+1. Clone este repositório:
+
+   ```bash
+   git clone https://github.com/noah-bergamo/WalletTest.git
+   cd WalletTest
+   ```
+
+2. Instale todas as dependências:
+
+   ```
+   yarn
+   ```
+
+   ou, se preferir o npm:
+
+   ```
+   npm install
+   ```
+
+   execute o seguinte comando para resolver as dependências do iOS:
+
+   ```
+   npx pod-install ios
+   ```
+
+   3. Abra um novo terminal na pasta do projeto e, em seguida, entre na pasta **database** e execute o servidor
+
+   ```
+   cd database && json-server --watch db.json && cd ..
+   ```
+
+3. Rode o projeto:
+
+   **Android**
+
+   ```
+   yarn android
+   npm run android
+   ```
+
+   **iOS**
+
+   ```
+   yarn ios
+   npm run ios
+   ```
