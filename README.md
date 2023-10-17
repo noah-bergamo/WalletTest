@@ -2,11 +2,9 @@
 
 ## Descrição
 
-Esse é um teste efetuado em um dos meus processo seletivos.
+Esse é um aplictivo em React Native feito para um teste efetuado em um dos meus processo seletivos.
 
 ## Pré-requisitos
-
-Liste os pré-requisitos necessários para rodar o projeto, como as versões do Node.js, React Native, etc.
 É necessário ter seguido o passo-a-passo da configuração do React Native. Caso não tenha feito, [clique aqui](https://reactnative.dev/docs/environment-setup).
 
 ## Instalação
