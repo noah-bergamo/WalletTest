@@ -1,4 +1,4 @@
-import Button from "./Button/Button";
+import Button from "./base/Button/Button";
 import Card, { CardType } from "./Card/Card";
 import CardList from "./CardList/CardList";
 import Screen from "./base/Screen/Screen";

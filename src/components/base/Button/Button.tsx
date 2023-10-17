@@ -7,7 +7,7 @@ import {
 } from "react-native";
 import { COLORS } from "utils/theme/colors/colors";
 
-type ButtonVariant = "green" | "blue";
+type ButtonVariant = "green" | "blue" | "hyperlink";
 type ButtonProps = {
   label: string;
   variant?: ButtonVariant;
@@ -17,11 +17,15 @@ const Button = ({
   label,
   onPress,
   disabled,
+  style,
   ...rest
 }: ButtonProps) => {
   const { container } = styles;
   const isGreenVariant = variant === "green";
-  const backgroundColor = disabled
+  const isHyperlink = variant === "hyperlink";
+  const backgroundColor = isHyperlink
+    ? "transparent"
+    : disabled
     ? COLORS.BASE.ICE_WHITE
     : isGreenVariant
     ? COLORS.BASE.LIME_GREEN
@@ -31,7 +35,7 @@ const Button = ({
     <TouchableOpacity
       {...rest}
       disabled={disabled}
-      style={[container, { backgroundColor }]}
+      style={[container, { backgroundColor }, style]}
       onPress={onPress}
     >
       <Text

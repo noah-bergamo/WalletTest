@@ -22,7 +22,7 @@ const HomeDetails = ({ showDetails }: { showDetails: boolean }) => {
 
 const Screen = ({ children, noPadding, name, style, ...rest }: ScreenProps) => {
   const { container } = styles;
-  const showDetails = name === "HOME" || name === "ADD_CARD";
+  const showDetails = name === "HOME" || name === "CARD_ADDED_CONFIRMATION";
   return (
     <View
       style={[

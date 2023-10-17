@@ -1,6 +1,7 @@
 import { TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import {
+  NativeStackNavigationOptions,
   NativeStackNavigationProp,
   NativeStackScreenProps,
   createNativeStackNavigator,
@@ -19,13 +20,11 @@ import { COLORS, TYPOGRAPHY } from "@theme";
 import BackIcon from "../../assets/icons/back_arrow.svg";
 import PlusIcon from "../../assets/icons/plus.svg";
 
-import { CardType } from "components/Card/Card";
-
-type RootStackParamList = {
+export type RootStackParamList = {
   HomeScreen: undefined;
   CardsScreen: undefined;
   AddCardScreen: undefined;
-  CardAddedConfirmationScreen: { card: CardType };
+  CardAddedConfirmationScreen: undefined;
 };
 export type HomeProps = NativeStackScreenProps<
   RootStackParamList,
@@ -49,9 +48,10 @@ const MainNavigator = () => {
   const { goBack, navigate } =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
 
-  const AddCardScreenOptions = {
+  const AddCardScreenOptions: NativeStackNavigationOptions = {
     headerTransparent: true,
     headerTitle: "cadastro",
+    headerTitleAlign: "center",
     headerTitleStyle: {
       fontFamily: TYPOGRAPHY.FONT_FAMILIES.PT_SANS,
       color: COLORS.TEXT.CIAN_BLUE,
@@ -63,9 +63,10 @@ const MainNavigator = () => {
       </TouchableOpacity>
     ),
   };
-  const CardsScreenOptions = {
+  const CardsScreenOptions: NativeStackNavigationOptions = {
     headerTintColor: COLORS.BASE.WHITE,
     headerTitle: "Wallet Test",
+    headerTitleAlign: "center",
     headerTitleStyle: {
       fontFamily: TYPOGRAPHY.FONT_FAMILIES.PT_SANS,
       color: COLORS.TEXT.DARK_BLUE,
@@ -103,6 +104,7 @@ const MainNavigator = () => {
       <Stack.Screen
         name={NAV_CONSTANTS.SCREENS.CARD_ADDED_CONFIRMATION}
         component={CardAddedConfirmationScreen}
+        options={AddCardScreenOptions}
       />
     </Stack.Navigator>
   );

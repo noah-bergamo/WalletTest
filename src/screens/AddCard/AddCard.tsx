@@ -1,80 +1,23 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   Keyboard,
   KeyboardAvoidingView,
+  Platform,
   StyleSheet,
   TouchableWithoutFeedback,
   View,
 } from "react-native";
-import { createNumberMask } from "react-native-mask-input";
-import moment from "moment";
 import { Button, Text, Screen, TextInput } from "components";
 import { HomeStrings } from "strings";
-import { AddCardProps } from "navigation/MainNavigator";
 import { CameraIcon } from "../../../assets/icons";
 import { AddCardStrings } from "strings/AddCardStrings";
+import useAddScreen from "./useAddCard";
 
-type State = typeof INITIAL_STATE;
+const AddCardScreen = () => {
+  const { canSubmit, onChange, card, onSubmit, expDateMask, cardMask } =
+    useAddScreen();
 
-const cardMask = [
-  /\d/,
-  /\d/,
-  /\d/,
-  /\d/,
-  " ",
-  /\d/,
-  /\d/,
-  /\d/,
-  /\d/,
-  " ",
-  /\d/,
-  /\d/,
-  /\d/,
-  /\d/,
-  " ",
-  /\d/,
-  /\d/,
-  /\d/,
-  /\d/,
-];
-
-const expDateMask = createNumberMask({
-  separator: "/",
-});
-
-const INITIAL_STATE = {
-  id: "",
-  number: "",
-  name: "",
-  expDate: "",
-  cvv: "",
-};
-
-const validateExpDate = (expirationDate: string) => {
-  const [month, year] = expirationDate.split("/");
-  const newDate = moment(`20${year}-${month}-30`);
-  if (newDate > moment()) return true;
-};
-
-const AddCardScreen = ({ navigation }: AddCardProps) => {
-  const { navigate } = navigation;
-  const [formState, setFormState] = useState<State>(INITIAL_STATE);
-
-  const { number, cvv, expDate, name } = formState;
-
-  const canSubmit =
-    number.length === 19 &&
-    cvv.length === 3 &&
-    expDate.length == 5 &&
-    validateExpDate(expDate) &&
-    name.split(" ").length > 1;
-
-  const onChange = (text: string, field: keyof typeof INITIAL_STATE) => {
-    const newState = { ...formState };
-    newState[field] = text;
-    setFormState(newState);
-  };
-
+  const { number, cvv, expDate, name } = card;
   const {
     container,
     textContainer,
@@ -88,7 +31,7 @@ const AddCardScreen = ({ navigation }: AddCardProps) => {
       <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
         <KeyboardAvoidingView
           style={keyboardAvoidingContiner}
-          behavior="padding"
+          behavior={Platform.OS === "ios" ? "padding" : "height"}
         >
           <Text size="H1" color="WHITE" style={textContainer}>
             {HomeStrings.homeTitle}
@@ -98,15 +41,17 @@ const AddCardScreen = ({ navigation }: AddCardProps) => {
             label={AddCardStrings.cardNumber}
             placeholder="1234 5678 9012 3456"
             onChangeText={(unmasked) => onChange(unmasked, "number")}
-            value={formState.number}
+            value={number}
             icon={CameraIcon}
             mask={cardMask}
+            keyboardType="number-pad"
           />
           <TextInput
             label={AddCardStrings.holderName}
-            placeholder=""
+            placeholder="Digite seu nome"
             onChangeText={(unmasked) => onChange(unmasked, "name")}
-            value={formState.name}
+            value={name}
+            keyboardType="default"
           />
           <View style={inputRowContainer}>
             <TextInput
@@ -116,9 +61,10 @@ const AddCardScreen = ({ navigation }: AddCardProps) => {
               onChangeText={(masked) => {
                 onChange(masked, "expDate");
               }}
-              value={formState.expDate}
+              value={expDate}
               mask={expDateMask}
               maxLength={5}
+              keyboardType="number-pad"
             />
             <TextInput
               label={AddCardStrings.cvv}
@@ -126,18 +72,15 @@ const AddCardScreen = ({ navigation }: AddCardProps) => {
               onChangeText={(unmasked) => {
                 onChange(unmasked, "cvv");
               }}
-              value={formState.cvv}
+              value={cvv}
               mask={[/\d/, /\d/, /\d/]}
+              keyboardType="number-pad"
             />
           </View>
 
           <Button
             label={AddCardStrings.buttonText}
-            onPress={() => {
-              navigate("CardAddedConfirmationScreen", {
-                card: formState,
-              });
-            }}
+            onPress={onSubmit}
             disabled={!canSubmit}
           />
         </KeyboardAvoidingView>

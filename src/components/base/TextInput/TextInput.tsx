@@ -36,6 +36,7 @@ const TextInput = ({
           placeholder={placeholder}
           onChangeText={onChangeText}
           style={inputText}
+          placeholderTextColor={COLORS.TEXT.LIGHT_GRAY}
         />
       </View>
     </View>

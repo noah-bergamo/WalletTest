@@ -1,6 +1,7 @@
 import Text from "components/base/Text/Text";
-import { View, TouchableOpacity, StyleSheet } from "react-native";
+import { View, TouchableOpacity, StyleSheet, ViewStyle } from "react-native";
 import { COLORS } from "utils/theme/colors/colors";
+import CardPlaceholder from "./CardPlaceholder";
 
 export type CardType = {
   id: string;
@@ -11,39 +12,53 @@ export type CardType = {
 };
 
 type CardProps = {
-  cardData: CardType;
+  cardData: CardType | null;
   index: number;
-  onPress: () => void;
-  variant?: "black" | "green";
-  selected?: boolean;
+  onPress?: () => void;
+  variant?: CardVariant;
+  style?: ViewStyle;
 };
 
-const Card = ({
-  cardData: { name, number, cvv },
-  variant = "black",
-  index = 0,
-  selected = false,
-}: CardProps) => {
+export type CardVariant = "green" | "black";
+
+const Card = (props: CardProps) => {
   const {
     cardContainer,
     cardsContainer,
     cardDetailsContainer,
     cardNumberText,
-  } = styles;
+  } = cardStyles;
 
+  const { onPress, variant, style } = props;
   const isBlack = variant === "black";
   const textColor = isBlack ? "WHITE" : "DARK_GRAY";
 
+  if (!props.cardData) {
+    return (
+      <CardPlaceholder
+        isBlack={isBlack}
+        style={style || {}}
+        onPress={onPress}
+      />
+    );
+  }
+
+  const {
+    cardData: { name, number, expDate },
+  } = props;
+  const last4Digits = number.length - 5;
+  const backgroundColor = isBlack ? COLORS.TEXT.BLACK : COLORS.BASE.LIME_GREEN;
+  
   return (
     <TouchableOpacity
       style={[
         cardContainer,
         {
-          bottom: 0 + 60 * index,
-          backgroundColor: isBlack ? COLORS.TEXT.BLACK : COLORS.BASE.LIME_GREEN,
-          zIndex: 999 - index,
+          backgroundColor,
         },
       ]}
+      onPress={onPress}
+      disabled={!onPress}
     >
       <View style={cardsContainer}>
         <Text size="H4" color={textColor}>
@@ -55,19 +70,19 @@ const Card = ({
           {name}
         </Text>
         <Text color={textColor} style={cardNumberText}>
-          **** **** **** {number.substring(number.length - 5)}
+          **** **** **** {last4Digits}
         </Text>
         <Text size="P1" color={textColor}>
-          Validade {cvv}
+          Validade {expDate}
         </Text>
       </View>
     </TouchableOpacity>
   );
 };
 
-const styles = StyleSheet.create({
+export const cardStyles = StyleSheet.create({
   cardContainer: {
-    position: "absolute",
+    alignSelf: "center",
     height: 180,
     width: 300,
     borderRadius: 16,
