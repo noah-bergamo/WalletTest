@@ -44,6 +44,13 @@ Esse é um aplictivo em React Native feito para um teste efetuado em um dos meus
 
    **Android**
 
+   ***Atenção! Para o app android conseguir acessar o servidor local (localhost:3000), precisamos liberar a porta 3000 para os emuladores.
+   antes de rodar o projeto, rode o seguinte comando:***
+
+   ```
+   adb reverse tcp:3000 tcp:3000
+   ```
+
    ```
    yarn android
    npm run android
